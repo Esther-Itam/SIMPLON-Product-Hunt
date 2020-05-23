@@ -1,44 +1,60 @@
- 
+
 // TABS
   $(document).ready(function(){
     $('.tabs').tabs();
-  });
-
-
+  
 // NAVBAR---------------------------------------------------------------
-$(document).ready(function(){
-  $('.sidenav').sidenav();
-});
 
+  $('.sidenav').sidenav();
 
 // MODAL
-$(document).ready(function(){
+
   $('.modal').modal();
 });
 
+// REQUETE FETCH
+
+
+// je fais ma request fetch
+function upVote (productId){
+  const formData = new FormData();
+  formData.append("productId", productId);
+
+  let myRequest = fetch('../PDO/votes.php',{
+    method: "POST",
+    body: formData
+  });
+
+  myRequest
+    .then(jsonResponse =>{
+      if(jsonResponse.status == 200){
+        return jsonResponse.text()
+      }else{
+        console.log("error request");
+      }
+    }) 
+    .then(vote => {
+      let upVoteBtn = document.querySelector(".upvote-btn");
+      upVoteBtns.forEach(upVoteBtn => {
+        upVoteBtn.textContent = vote;
+      })
+    })
+}
+      
 
 
 
 
 
 
-// UPVOTE BUTTONS
 
-// let upVoteBtns = document.querySelectorAll(".upvote-btn");
-// forEach(upVoteBtn => upVoteBtn.addEventListener("mouseenter", function(e){
-//   e.target.classlist.add("#ff5252 red accent-2");
-//   console.log(e.target)
-// }))
 
- 
 
-// // I apply an click event listener on all the card buttons
-//   $upvoteBtns = document.querySelectorAll(".upvote-btn");
-//   $upvoteBtns.forEach($upvoteBtn => $upvoteBtn.addEventListener("click", updateVote))
 
-//   function updateVote(){
-//     console.log("hello")
+// je .json() la réponse
 
-    
-//     fetch();
-//   }
+// je display les datas
+
+
+
+
